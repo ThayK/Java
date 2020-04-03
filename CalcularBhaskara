@@ -1,0 +1,81 @@
+package secao7;
+
+import java.util.Scanner;
+
+public class Bhaskara {
+
+	public static void main(String[] args) {
+		//Código de bhaskara
+		
+		Scanner scanner = new Scanner(System.in);  
+		String  expression = null;
+		String  valorDeA = "";
+		String  valorDeB = "";
+		String  valorDeC = "";
+		
+		
+		System.out.println("Digite a expressão");
+		expression = scanner.next();
+		
+		int  tamanhoString = expression.length();
+		int  i = 0;
+		int  proxNumB = 0;
+		int  proxNumC = 0;
+		
+		//Encontrando valor A da Bhaskara
+		  
+		  while(i<tamanhoString) {
+			//EqualIgnoreCase é sensitive, ou seja X ou x (minusculo ou maiusculo)
+			if(expression.substring(i,i+1).equalsIgnoreCase("x")) {
+				proxNumB = i+1;
+				//Essa condição é para que possamos sair do loop
+				i = tamanhoString + 1;
+				if(valorDeA == "") {
+					valorDeA = "1";
+				}
+			}else {
+				valorDeA = valorDeA + expression.substring(i,i+1);
+				i++;	
+			}
+			
+		  }	
+		  
+		  System.out.println("Valor de A:"+valorDeA);
+		  
+		   
+		  i=proxNumB;
+		  while(i<tamanhoString) {
+			  if(expression.substring(i,i+1).equalsIgnoreCase("y")) {
+					proxNumC = i+1;
+					//Essa condição é para que possamos sair do loop
+					i = tamanhoString + 1;
+				}else {
+					valorDeB = valorDeB + expression.substring(i,i+1);
+					i++;	
+				} 
+		  }
+		  
+		  System.out.println("Valor de B:"+valorDeB);
+		  
+		  //Em cada método eu salvo o valor do proxNumC que é de onde eu devo ler a string sempre deixando de contar
+		  //o que eu já salvei de X e Y.
+		  i = proxNumC;
+		  while(i<tamanhoString) {
+			  valorDeC = valorDeC + expression.substring(i,i+1);
+			  i++;
+		  }
+		  
+		    System.out.println("Valor de C:"+valorDeC);
+		    
+		    
+		    //Calcular valor de bhaskara
+		    
+		    int raiz =  (int) Math.sqrt( Integer.parseInt(valorDeB)* Integer.parseInt(valorDeB) - 4 * Integer.parseInt(valorDeA) * Integer.parseInt(valorDeC));
+		    
+		    int sinalPositivo = ((-Integer.parseInt(valorDeB) + raiz) / (2 * Integer.parseInt(valorDeA)));   
+		    int sinalNegativo = ((-Integer.parseInt(valorDeB) - raiz) / (2 * Integer.parseInt(valorDeA)));
+		    		
+		    System.out.println("Sinal positivo:"+sinalPositivo);
+		    System.out.println("Sinal negativo:"+sinalNegativo);
+		}
+}
